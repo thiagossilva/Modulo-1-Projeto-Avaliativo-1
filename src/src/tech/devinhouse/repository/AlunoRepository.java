@@ -1,5 +1,6 @@
 package tech.devinhouse.repository;
 
+import tech.devinhouse.cli.Display;
 import tech.devinhouse.cli.Interacoes;
 import tech.devinhouse.models.Aluno;
 import tech.devinhouse.models.Pessoa;
@@ -8,6 +9,7 @@ import java.util.*;
 
 public class AlunoRepository {
     private List<Pessoa> dadosPessoa = new ArrayList<>();
+    Display display = new Display();
     Interacoes interacoes = new Interacoes();
     Scanner sc = new Scanner(System.in);
 
@@ -33,16 +35,58 @@ public class AlunoRepository {
     }
 
     public void atualizarAluno(int id, List<Pessoa> dadosPessoa) {
-        System.out.println("Insira a atualização de situação do aluno");
+        System.out.println("Escolha a atualização de situação do aluno");
+        display.menuSituacaoAluno();
         String situacao = sc.nextLine();
-        for (Pessoa aluno : dadosPessoa) {
+        Integer situacaoFmt = null;
+        try {
+           situacaoFmt = Integer.valueOf(situacao);
+        } catch (NumberFormatException e) {
+            System.out.println(interacoes.vermelho + "É preciso selecionar a situação do aluno" + interacoes.resetarCor);
+        } if (situacaoFmt == 1) {
+            for (Pessoa aluno : dadosPessoa) {
                 if (aluno.getCodigo() == id) {
                     Aluno alunoAlterarSituacao = (Aluno) aluno;
-                    alunoAlterarSituacao.setSituacaoMatricula(situacao);
-            } else {
+                    alunoAlterarSituacao.setSituacaoMatricula("ativo");
+                    System.out.println(interacoes.verde + "Situação alterada com sucesso!"+ interacoes.resetarCor);
+                } else {
                     System.out.println("Não foi possível encontrar aluno com esse ID");
                 }
+            }
+        } else if (situacaoFmt == 2) {
+            for (Pessoa aluno : dadosPessoa) {
+                if (aluno.getCodigo() == id) {
+                    Aluno alunoAlterarSituacao = (Aluno) aluno;
+                    alunoAlterarSituacao.setSituacaoMatricula("inativo");
+                    System.out.println(interacoes.verde + "Situação alterada com sucesso!"+ interacoes.resetarCor);
+                } else {
+                    System.out.println("Não foi possível encontrar aluno com esse ID");
+                }
+            }
+        } else if (situacaoFmt == 3) {
+            for (Pessoa aluno : dadosPessoa) {
+                if (aluno.getCodigo() == id) {
+                    Aluno alunoAlterarSituacao = (Aluno) aluno;
+                    alunoAlterarSituacao.setSituacaoMatricula("atendimento pedagógico");
+                    System.out.println(interacoes.verde + "Situação alterada com sucesso!"+ interacoes.resetarCor);
+                } else {
+                    System.out.println("Não foi possível encontrar aluno com esse ID");
+                }
+            }
+        } else if (situacaoFmt == 4) {
+            for (Pessoa aluno : dadosPessoa) {
+                if (aluno.getCodigo() == id) {
+                    Aluno alunoAlterarSituacao = (Aluno) aluno;
+                    alunoAlterarSituacao.setSituacaoMatricula("irregular");
+                    System.out.println(interacoes.verde + "Situação alterada com sucesso!"+ interacoes.resetarCor);
+                } else {
+                    System.out.println("Não foi possível encontrar aluno com esse ID");
+                }
+            }
+        } else {
+            System.out.println("Opção incorreta");
         }
+
     }
 
     public void atendimentoAluno(int id, List<Pessoa> dadosPessoa) {

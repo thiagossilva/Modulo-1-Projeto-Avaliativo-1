@@ -32,7 +32,7 @@ public class PessoaRepository {
 
     public void listarTodos(List<Pessoa> pessoas) {
         for (Pessoa pessoa: pessoas) {
-            System.out.println(pessoa);
+            System.out.println("Código: " + pessoa.getCodigo() + ", nome: " + pessoa.getNome() + ", CPF: " + pessoa.getCpf());
         }
     }
     public void listar(Pessoa pessoa) {
